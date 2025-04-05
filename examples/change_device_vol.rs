@@ -1,7 +1,7 @@
 use std::io::{self, Write};
 
-use pulsectl::controllers::DeviceControl;
-use pulsectl::controllers::SinkController;
+use pactl::controllers::DeviceControl;
+use pactl::controllers::SinkController;
 
 fn main() {
     // create handler that calls functions on playback devices and apps

@@ -1,11 +1,11 @@
 [package]
-name = "pulsectl-rs"
-version = "0.3.2"
-authors = ["Kristopher Ruzic <krruzic@gmail.com>"]
+name = "pactl-rs"
+version = "0.4.0"
+authors = ["Logan Hickok-Dickson <self@notquiteapex.net>"]
 description = "A higher level API for libpulse-binding"
-homepage = "https://github.com/SeaDve/pulsectl-rs"
-documentation = "https://docs.rs/pulsectl-rs"
-repository = "https://github.com/SeaDve/pulsectl-rs"
+homepage = "https://github.com/NotQuiteApex/pactl"
+documentation = "https://docs.rs/pactl"
+repository = "https://github.com/NotQuiteApex/pactl"
 keywords = ["pulse", "pulseaudio", "binding", "audio", "api"]
 categories = ["api-bindings", "multimedia::audio"]
 readme = "README.md"
@@ -14,8 +14,8 @@ exclude = ["/.github/*"]
 edition = "2018"
 
 [lib]
-name = "pulsectl"
+name = "pactl"
 
 [dependencies.pulse]
 package = "libpulse-binding"
-version = "2.24.0"
+version = "2.29.0"

@@ -1,6 +1,6 @@
 fn main() {
     let mut handler =
-        pulsectl::controllers::SourceController::create().expect("Failed to create handler");
+        pactl::controllers::SourceController::create().expect("Failed to create handler");
     let server_info = handler
         .get_server_info()
         .expect("Failed to get server info");

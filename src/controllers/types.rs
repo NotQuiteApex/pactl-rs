@@ -105,10 +105,24 @@ impl<'a> From<def::SinkState> for DevState {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub enum Flags {
     SourceFLags(def::SourceFlagSet),
     SinkFlags(def::SinkFlagSet),
+}
+impl Clone for Flags {
+    fn clone(&self) -> Self {
+        // We manually implement Clone because `SourceFlagSet` and `SinkFlagSet` don't derive it.
+        // With these const functions, it ultimately ends up the same anyway.
+        match self {
+            Self::SourceFLags(arg0) => {
+                Self::SourceFLags(def::SourceFlagSet::from_bits_retain(arg0.bits()))
+            }
+            Self::SinkFlags(arg0) => {
+                Self::SinkFlags(def::SinkFlagSet::from_bits_retain(arg0.bits()))
+            }
+        }
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -175,7 +189,7 @@ impl<'a> From<&'a introspect::SinkInfo<'a>> for DeviceInfo {
             monitor_name: item.monitor_source_name.as_ref().map(|cow| cow.to_string()),
             latency: item.latency,
             driver: item.driver.as_ref().map(|cow| cow.to_string()),
-            flags: Flags::SinkFlags(item.flags),
+            flags: Flags::SinkFlags(def::SinkFlagSet::from_bits_retain(item.flags.bits())),
             proplist: item.proplist.clone(),
             configured_latency: item.configured_latency,
             base_volume: item.base_volume,
@@ -207,7 +221,7 @@ impl<'a> From<&'a introspect::SourceInfo<'a>> for DeviceInfo {
                 .map(|cow| cow.to_string()),
             latency: item.latency,
             driver: item.driver.as_ref().map(|cow| cow.to_string()),
-            flags: Flags::SourceFLags(item.flags),
+            flags: Flags::SourceFLags(def::SourceFlagSet::from_bits_retain(item.flags.bits())),
             proplist: item.proplist.clone(),
             configured_latency: item.configured_latency,
             base_volume: item.base_volume,

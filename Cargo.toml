@@ -1,5 +1,5 @@
 [package]
-name = "pactl-rs"
+name = "pactl"
 version = "0.4.0"
 authors = ["Logan Hickok-Dickson <self@notquiteapex.net>"]
 description = "A higher level API for libpulse-binding"
